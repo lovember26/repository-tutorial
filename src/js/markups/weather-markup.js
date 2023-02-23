@@ -3,7 +3,6 @@ import { months, days, weekDay, dateToWeek } from '../utils/weather-dates';
 import { onClick } from '../weather';
 import { getGeolocation } from '../weather';
 
-
 let weatherData = {
   coord: { lon: 30.2748, lat: 50.5461 },
   main: { temp: 5 },
@@ -112,12 +111,9 @@ function renderToGallery() {
   gallery.appendChild(item);
   setClickHandler(item, onClick);
 }
-renderToGallery();
-
-
+// renderToGallery();
 
 function addClassToCard() {
-
   const weekWeatherCard = document.querySelector('.weather__table');
   console.log(weekWeatherCard);
   weekWeatherCard.classList.toggle('is-active');
