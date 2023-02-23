@@ -1,0 +1,297 @@
+@media screen and (min-width: 320px) {
+    .calendar {
+        width: 320px;
+    }
+    .calendar-label {
+        display: none;
+    }
+    .calendar-btn{
+        width: 152px;
+    }
+    .wrapper {
+        top: 32;
+        left: -65;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .calendar {
+        width: 768px;
+    }
+    .calendar-label {
+        display: none;
+    }
+    .calendar-btn {
+        width: 152px;
+    }
+    .wrapper {
+        top: 31;
+        left: -65;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .calendar {
+        width: 1280px;
+    }
+    .calendar-label {
+        display: block;
+        margin-right: 37px;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 1.39;
+    
+        color: var(--primary-color);
+    }
+    .calendar-btn {
+        width: 168px;
+    }
+    .wrapper{
+        top: 31;
+        left: 210;
+    }
+}
+
+// div calendar
+.calendar {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    font-family: 'Manrope';
+    font-style: normal;
+}
+
+// button calendar
+.calendar-btn{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    height: 31px;
+
+    border: 1px solid var(--primary-color);
+    border-radius: 20px;
+    background-color: var(--primary-bcgcolor);
+
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--calendar-btn-text-color);
+    transition: $animation;
+}
+.icon-calendar {
+    width: 19px;
+    height: 19px;
+    fill: var(--calendar-btn-icon-color);
+    transition: $animation;
+}
+.icon-chevron {
+    width: 15px;
+    height: 15px;
+    fill: var(--calendar-btn-text-color);
+    transition: $animation;
+}
+.calendar-btn.btn-is-active {
+    background-color: #4440F6;
+    border: 1px solid #4440F6;
+    color: #FFFFFF
+}
+
+// return to current date button
+.today-btn{
+    display: flex;
+    align-items: center;
+    height: 31px;
+    border: 1px solid var(--primary-color);
+    border-radius: 20px;
+    background-color: var(--primary-bcgcolor);
+    color: var(--calendar-btn-text-color);
+    transition: $animation;
+}
+.icon-today{
+    width: 19px;
+    height: 19px;
+    fill: var(--calendar-btn-icon-color);
+    transition: $animation;
+}
+
+// hover/focus on buttons
+.calendar-btn:hover, .calendar-btn:focus,
+.today-btn:hover, .today-btn:focus{
+    background-color: #4440F6;
+    border: 1px solid #4440F6;
+    color: #FFFFFF;
+}
+.calendar-btn.btn-is-active>.icon-calendar,
+.calendar-btn.btn-is-active>.icon-chevron,
+.calendar-btn:hover>.icon-calendar,
+.calendar-btn:hover>.icon-chevron,
+.calendar-btn:focus>.icon-calendar,
+.calendar-btn:focus>.icon-chevron,
+.today-btn:hover .icon-today,
+.today-btn:focus .icon-today {
+    fill: #ffffff;
+}
+
+// wrapper modal (actually it is calendar)
+.wrapper{
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    overflow: hidden;
+}
+.modal {
+    position: absolute;
+
+    z-index: 999;
+    width: 250px;
+    height: 250px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+
+    transform: translateY(-200%);
+    transition: transform $animation;
+}
+.is-shown {
+    opacity: 1;
+    top: 0;
+    left: 0;
+    transform: translateY(0);
+}
+// inside the modal (calendar)
+// header
+.calendar-header {
+    display: flex;
+    align-items: center;
+    padding: 25px 25px 0px 25px;
+    justify-content: space-between;
+}
+.calendar-header .current-date {
+    display: inline;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.38;
+    color: #000000;
+}
+.date {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.next-year {
+    cursor: pointer;
+    margin-left: 5px;
+    margin-right: 10px;
+    color: var(--accent-color);
+}
+.years{
+    position: absolute;
+    display: block;
+    left: 120;
+    top: 0;
+    background: #fff;
+}
+.years ul{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.year-btn{
+    border: none;
+    background: #fff;
+    // width: 20px;
+    // height: 10px;
+}
+// header icons
+.icons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+#prev, #next{
+    width: 20px;
+    height: auto;
+    color: var(--accent-color);
+    font-size: 22px;
+    cursor: pointer;
+}
+.icons span:last-child {
+    margin-right: -10px;
+}
+
+// calendar grid
+.calendar-grid {
+    padding-top: 10px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 20px;
+}
+.calendar-grid ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    text-align: center;
+}
+.calendar-grid li {
+    color: #000000;
+    width: calc(100% / 7);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.8;
+}
+.calendar-grid .weeks li {
+    margin-bottom: 14px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 1.2;
+    text-align: center;
+    cursor: default;
+    color: rgba(60, 60, 67, 0.3);
+}
+
+// days
+.days li:nth-child(7n + 7) .button,
+.days li:nth-child(7n + 6) .button {
+    color: #878787;
+}
+.current-month-day {
+    color: var(--accent-color);
+}
+.button{
+    position: relative;
+    width: 26px;
+    height: 26px;
+    border: none;
+    padding: 0px;
+    background-color: transparent;
+    cursor: pointer;
+}
+.button.inactive, #inactive {
+    color: rgba(60, 60, 67, 0.1); 
+}
+.button.active {
+    color: #fff;
+}
+.button::before {
+    position: absolute;
+    content: "";
+    left: 50%;
+    top: 50%;
+    height: 26px;
+    width: 26px;
+    z-index: -1;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+.button.active::before {
+    background: var(--accent-color);
+}
+.button.weekend {
+    color: #878787;
+}

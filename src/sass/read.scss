@@ -1,0 +1,61 @@
+@import './utils/variables';
+
+@import './base/reset';
+@import './base/common';
+@import './base/mobileMenu';
+
+@import './components/header';
+@import './components/pagination';
+@import './components/categories';
+@import './components/calendar';
+@import './components/navigate-news';
+@import './components/newslist';
+@import './components/weather';
+@import './components/container';
+@import './components/card-news';
+@import './components/footer';
+@import './components/not-found';
+
+.revision-date-container {
+    margin: auto;
+    text-align: center;
+    max-width: 1250px;
+}
+
+.icon-arrow {
+    max-width: 15px;
+    max-height: 9px;
+    margin-left: 8px;
+}
+
+.revision-date-btn {
+    width: 100%;
+    padding-bottom: 12px;
+    text-align: start;
+    background-color: rgba(255, 255, 255, 1);
+    border: none;
+    border-bottom: 1px solid #929292;
+}
+
+.active-revision-date .icon-arrow {
+    transform: rotate(180deg);
+}
+
+.container-for-viewed-cards {
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+    gap: 32px;
+    margin-top: 40px;
+    margin-bottom: 60px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+}
+
+.viewed-cards {
+    width: 395px;
+    height: 675px;
+    border: 1px solid #141313;
+    border-radius: 5px;
+}

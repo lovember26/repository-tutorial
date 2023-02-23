@@ -1,0 +1,206 @@
+.weather__card {
+  position: relative;
+  padding: 32px 36px;
+  width: 100%;
+  background-color: #4440f7;
+  border-radius: 4px;
+  text-align: center;
+    @media screen and (min-width: 768px) {
+    width: 353px;
+    padding: 40px 30px 60px;
+  }
+  @media screen and (min-width: 1280px) {
+    width: 395px;
+  }
+}
+
+.weather__header {
+  padding-top: 5px;
+  padding-bottom: 14px;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  @media screen and (min-width: 768px) {
+    padding-top: 0;
+    padding-bottom: 2px;
+    margin-bottom: 89px;
+  }
+}
+
+.weather__temp {
+  font-size: 55px;
+  line-height: 1.16;
+  color: $widget-text-color;
+  @media screen and (min-width: 768px) {
+    font-size: 64px;
+    line-height: 1.17;
+  }
+}
+
+.weather__wrapper {
+  border-left: 1px solid $widget-text-color;
+  padding-left: 11px;
+}
+
+.weather__status {
+  margin-bottom: 5px;
+  font-size: 24px;
+  line-height: 1.17;
+  color: $widget-text-color;
+  @media screen and (min-width: 768px) {
+    font-size: 36px;
+  }
+}
+
+.weather__location {
+  display: flex;
+  text-align: center;
+  line-height: 1.14;
+  padding: 8px 9px;
+  background: rgba(254, 254, 255, 0.3);
+  border-radius: 10px;
+  color: $widget-text-color;
+  @media screen and (min-width: 768px) {
+    font-size: 20px;
+    line-height: 1.15;
+    padding: 10px 17px;
+  }
+}
+
+.weather__location::before {
+  content: '';
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-right: 4px;
+  background-image: url(../images/location.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  @media screen and (min-width: 768px) {
+    width: 27px;
+    height: 27px;
+    margin-right: 8px;
+  }
+}
+
+.wheather__icon {
+  width: 128px;
+  height: 121px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 40px;
+  @media screen and (min-width: 768px) {
+    width: 165px;
+    height: 156px;
+    margin-bottom: 90px;
+  }
+}
+
+.weather__data {
+  margin-bottom: 18px;
+  @media screen and (min-width: 768px) {
+    margin-bottom: 28px;
+  }
+}
+
+.weather__date {
+  font-size: 28px;
+  line-height: 1.18;
+  color: $widget-text-color;
+  @media screen and (min-width: 768px) {
+    font-size: 36px;
+    line-height: 1.17;
+  }
+}
+
+.weather__btn {
+  display: inline-block;
+  padding: 10px 12px;
+  background-color: rgba(254, 254, 255, 0.3);
+  border-radius: 10px;
+  border: none;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.19;
+  color: $widget-text-color;
+  cursor: pointer;
+  transition: background-color 250ms linear;
+    @media screen and (min-width: 768px) {
+      font-size: 20px;
+      line-height: 1.15;
+      padding: 10px 12px;
+    }
+}
+// weather to week
+.weather__table {
+  width: 100%;
+  margin: 0;
+}
+
+.weather__btn-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  padding: 8px 10px;
+  background-color: rgba(254, 254, 255, 0.3);
+  color: $widget-text-color;
+  border: 1px solid $accent-color;
+  font-size: 12px;
+  line-height: 1.33;
+      @media screen and (min-width: 768px) {
+        font-size: 14px;
+      }
+}
+
+.weather__btn:hover,
+.weather__btn:focus {
+  background-color: $widget-text-color;
+  color: $lt-switcher-color;
+}
+
+.weather__location-week {
+  margin-top: 15px;
+  margin-bottom: 10px;
+  background-color: transparent;
+}
+
+.weather__week {
+  color: $widget-text-color;
+  font-size: 12px;
+  min-width: 50px;
+  text-align: left;
+  @media screen and (min-width: 768px) {
+    font-size: 14px;
+  }
+}
+
+.weather__week-last {
+  text-align: right;
+}
+
+.wheather__icon-week {
+  width: 50px;
+  height: 50px;
+    @media screen and (min-width: 768px) {
+  width: 60px;
+  height: 60px;
+  }
+
+}
+
+// class for list weather to week
+.news-gallery {
+  position: relative;
+}
+
+.is-active {
+  position: absolute;
+  top: 0;
+  right: 50%;
+  transform: translateX(50%);
+  z-index: 5;
+  box-shadow: -11px 15px 29px 1px rgba(32, 51, 77, 0.25);
+}
+

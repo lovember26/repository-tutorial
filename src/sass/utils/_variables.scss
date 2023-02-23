@@ -1,0 +1,74 @@
+$main-font: 'Manrope', sans-serif;
+$widget-font: 'Roboto', sans-serif;
+$theme-switcher-font: 'Poppins', sans-serif;
+
+$lt-main-text-color: #111321; //lt - light theme
+$dt-main-text-color: #F4F4F4; //dt - dark theme
+
+$lt-body-color: #F4F4F4;
+$dt-body-color: #2E2E2E;
+
+$footer-color: #A8A8A8;
+$readed-color: #00DD73;
+
+$accent-color: #4440F6;
+$category-border-color: #4440F7;
+
+$lt-switcher-color: #4B48DB;
+$dt-switcher-color: #5F6775;
+
+$widget-text-color: #FFFFFF;
+
+$animation: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+$mobile: 480px;
+$mobile-end: 767px;
+$tablet: 768px;
+$tablet-end: 1279px;
+$desktop: 1280px;
+
+:root {
+    --primary-bcgcolor: #F4F4F4;
+    --primary-color: #111321;
+    --primary-textcolor: #111321;
+    --primary-color-static: #111321;
+    --accent-color: #4B48DB;
+    --primary-iconscolor: #4B48DB;
+    --slidebar-bcgcolor: #FFFFFF;
+    --slider-bordercolor: #4B48DB;
+    --themelight-namecolor: #4B48DB;
+    --themedark-namecolor: #5F6775;
+    --headerborder-color: rgba(0, 0, 0, 0.2);
+    --calendar-btn-text-color: #A2A2A2;
+    --calendar-btn-icon-color: #4B48DB;
+
+    --button-bg-color: #FFFFFF;
+    --button-font-color: #4440F6;
+    --button-border-color: #4440F7;
+
+    --time-color: #A8A8A8;
+    --readed-color: #00DD73;
+    --category-bgd: rgba(68, 64, 247, 0.7);
+    --category-text: #FFFFFF;
+
+}
+
+.theme-dark {
+    color: $dt-main-text-color;
+    background-color: $dt-body-color;
+    --primary-bcgcolor: #2E2E2E;
+    --primary-color: #F4F4F4;
+    --primary-textcolor: #F4F4F4;
+    --primary-color-static: #111321;
+    --accent-color: #4B48DB;
+    --primary-iconscolor: #5F6775;
+    --slidebar-bcgcolor: #4B48DB;
+    --slider-bordercolor: #FFFFFF;
+    --themelight-namecolor: #5F6775;
+    --themedark-namecolor: #4B48DB;
+    --headerborder-color: rgba(244, 244, 244, 0.2);
+    --calendar-btn-text-color: #F4F4F4;
+    --calendar-btn-icon-color: #FFFFFF;
+    --category-bgd: rgba(68, 64, 247, 0.7);
+    --category-text: #FFFFFF;
+}

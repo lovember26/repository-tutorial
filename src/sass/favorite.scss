@@ -1,0 +1,15 @@
+@import './utils/variables';
+
+@import './base/reset';
+@import './base/common';
+@import './base/mobileMenu';
+
+@import './components/header';
+@import './components/newslist';
+
+@import './components/container';
+@import './components/card-news';
+@import './components/footer';
+@import './components/not-found';
+
+@import './components/favorite-gallery';

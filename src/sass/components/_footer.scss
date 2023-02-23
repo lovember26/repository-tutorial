@@ -1,0 +1,17 @@
+.page-footer {
+  background-color: $footer-color;
+  width: 320px;
+  height: 120px;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  @media screen and (min-width: $tablet) {
+    width: 768px;
+    height: 146px;
+  }
+
+  @media screen and (min-width: $desktop) {
+    width: 1280px;
+  }
+}

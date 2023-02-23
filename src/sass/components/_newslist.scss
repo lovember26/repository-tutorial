@@ -1,0 +1,128 @@
+.newslist-section {
+  // background-color:
+  padding-top: 40px;
+  padding-bottom: 40px;
+
+  @media screen and (min-width: 768px) {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+  @media screen and (min-width: 1280px) {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+}
+
+.news-gallery {
+  display: flex;
+  // flex-direction: row;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  // padding: 0;
+  // margin: 10px;
+  // outline: 1px solid red;
+}
+.news-card {
+  // outline: 1px solid red;
+  flex-basis: 100%;
+  position: relative;
+  height: 630px;
+
+  @media screen and (min-width: 768px) {
+    flex-basis: calc((100% - 30px) / 2);
+    height: 675px;
+  }
+  @media screen and (min-width: 1280px) {
+    flex-basis: calc((100% - 60px) / 3);
+  }
+}
+
+
+
+//     .news-title,
+//     .news-text {
+
+//         text-align: left;
+//         margin: 0;
+
+//     }
+
+//       .news-title {
+
+//       font-weight: 700;
+//       font-size: 24px;
+//       line-height: 1.37;
+//       letter-spacing: -0.01em;
+
+//       @media screen and (min-width: 768px) {
+//         font-size: 32px;
+//           }
+
+//       }
+
+//         .news-text {
+//       margin-top: 20px;
+//       line-height: 1.37;
+//       }
+
+//   }
+
+//   .news-img {
+//     width: 395px;
+//     height: 395px;
+//     outline: 1px solid red;
+//   }
+//
+//  .search-theme {
+//     padding: 4px, 8px;
+//     position: absolute;
+//     width: 112px;
+//     height: 24px;
+//     left: 0px;
+//     top: 40px;
+
+//     font-weight: 500;
+//     font-size: 12px;
+//     line-height: 1.33;
+//     text-align: center;
+//     // justify-content: center;
+
+//     color: $widget-text-color;
+//     background-color: $accent-color;
+
+//  }
+//   .favourite-btn {
+//     display: inline-block;
+//     padding-top: 6px;
+//     padding-bottom: 6px;
+//     // padding-right: 55px;
+//     padding-left: 12px;
+//     position: absolute;
+//     top: 355px;
+//     left: 257px;
+
+//     min-width: min 126px;
+//     font-size: 12px;
+//     line-height: 1.33;
+
+//     border: red;
+//     border-radius: 20px;
+//     text-align: center;
+//     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+//     cursor: pointer;
+//     // transition: background-color $transition-duration $function;
+
+//     // @media screen and (min-width: 1200px) {
+//     //   padding-left: 28px;
+//     //   padding-right: 62px;
+//     //   margin-left: 12px;
+//     // }
+//   }
+
+//   .icon-heart-transparent{
+//     // fill: $primary-white-color;
+//     position: absolute;
+//     // top: 355px;
+//     // left: 257px;
+//   }
