@@ -18,7 +18,7 @@ const notFoundPage = document.querySelector('.not-found');
 async function getPopularProduct() {
   try {
     const getNews = await getPopularNewsAPI();
-    // console.log('Arr objects with mostpopular News', getNews.results);
+    console.log(getNews.results);
     newsArr = getNews.results;
 
     getAmountCards(newsArr);
