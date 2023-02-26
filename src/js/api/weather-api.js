@@ -27,9 +27,9 @@ async function getWeatherDay() {
 
 async function getWeatherWeek() {
   try {
-    console.log('week api');
+    // console.log('week api');
     const res = await axios.get(`${api}`);
-    console.log(res);
+    // console.log(res);
     return res;
   } catch (error) {
     console.error(error);
@@ -38,7 +38,7 @@ async function getWeatherWeek() {
 
 
 function onSuccess(position) {
-  console.log('day');
+  // console.log('day');
   const { latitude, longitude } = position.coords;
   api = `${URL}2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${API_KEY}`;
   getWeatherDay().then(getMarkupWeather);
@@ -50,7 +50,7 @@ function onError(error) {
 }
 
 function onSuccessToWeek(position) {
-  console.log('week ');
+  // console.log('week ');
   const { latitude, longitude } = position.coords;
   api = `${URL}3.0/onecall?lat=${latitude}&lon=${longitude}&units=metric&exclude=current,hourly&appid=${API_KEY}`;
   getWeatherWeek().then(getMarkupWeatherToWeek);

@@ -10,7 +10,12 @@ const KEYS = [
   'aKKbrKpe1YGi66K7WzFvajOaocjKPkWa',
   'H3FRH5IMtPz0yNN170uMkDXY0wt0kfbS',
   'a9ln0xE0xoZg0UKIfadTWG9XvaVU3VY0',
-  'T9gT3cF0WPsOQPyLn0p0McCuVRVQEnDR'
+  'T9gT3cF0WPsOQPyLn0p0McCuVRVQEnDR',
+  'IMARr0RmP8rblBdmV6bMB139uX5n5unh',
+  'UOu0YdlrkIoRCSoKuTMZFGpumw0I0Y05',
+  'pFLyeAOoTUkhEAUJsqJzz04Hc5pc9jB6',
+  'no8t4JST8lO1h1HISonGqBJL9wN1oSkU',
+  '7cowQMjSOte3DmsL9oMIjLMUYjC2Fw6m'
 ];
 function getKey() {
   return KEYS[Math.round(Math.random() * (KEYS.length - 1))]
@@ -31,13 +36,13 @@ export async function getCategoriesAPI() {
   }
 }
 
-export async function getCategoryNewsAPI(category, offset) {
+export async function getCategoryNewsAPI(category) {
   const KEY = getKey()
   const BASE_URL = `https://api.nytimes.com/svc//news/v3/content/all/${category}.json`;
 
   try {
     const response = await axios.get(
-      `${BASE_URL}?api-key=${KEY}&limit=500&${offset}`
+      `${BASE_URL}?api-key=${KEY}&limit=500`
     );
     return response.data;
   } catch (error) {

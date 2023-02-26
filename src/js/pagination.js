@@ -12,11 +12,52 @@ const valuePage = {
   totalPages: 0,
 };
 
+function handleButton(element) {
+  if (element.classList.contains('prev-btn')) {
+    valuePage.curPage -= 1;
+    // console.log(valuePage.curPage);
+    handleButtonLeft();
+    ref.btnNextPg.disabled = false;
+  } else if (element.classList.contains('next-btn')) {
+    valuePage.curPage += 1;
+    // console.log(valuePage.curPage);
+    handleButtonRight();
+    ref.btnPrevPg.disabled = false;
+  }
+  // pagination();
+}
+
+function handleButtonLeft() {
+  if (valuePage.curPage === 1) {
+    ref.btnPrevPg.disabled = true;
+    ref.btnNextPg.disabled = false;
+  } else {
+    ref.btnPrevPg.disabled = false;
+  }
+}
+
+function handleButtonRight() {
+  if (valuePage.curPage === valuePage.totalPages) {
+    //  console.log(valuePage.curPage);
+    ref.btnNextPg.disabled = true;
+    ref.btnPrevPg.disabled = false;
+  } else {
+    ref.btnNextPg.disabled = false;
+  }
+}
+
+function goToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  });
+}
+
 // DYNAMIC PAGINATION
 function pagination(obj) {
   const { totalPages, curPage, numLinksTwoSide: delta } = obj;
 
-  const range = delta + 4; // use for handle visible number of links left side
+  const range = delta + 2; // use for handle visible number of links left side
 
   let render = '';
   let renderTwoSide = '';
@@ -71,46 +112,6 @@ function renderPage(index, active = '') {
   return ` <button class="pagination__btn pagination__btn-num ${active}"  data-page="${index}">${index}</button>`;
 }
 
-function handleButton(element) {
-  if (element.classList.contains('prev-btn')) {
-    valuePage.curPage -= 1;
-    // console.log(valuePage.curPage);
-    handleButtonLeft();
-    ref.btnNextPg.disabled = false;
-  } else if (element.classList.contains('next-btn')) {
-    valuePage.curPage += 1;
-    // console.log(valuePage.curPage);
-    handleButtonRight();
-    ref.btnPrevPg.disabled = false;
-  }
-  // pagination(obj);
-}
-
-function handleButtonLeft() {
-  if (valuePage.curPage === 1) {
-    ref.btnPrevPg.disabled = true;
-    ref.btnNextPg.disabled = false;
-  } else {
-    ref.btnPrevPg.disabled = false;
-  }
-}
-
-function handleButtonRight() {
-  if (valuePage.curPage === valuePage.totalPages) {
-    //  console.log(valuePage.curPage);
-    ref.btnNextPg.disabled = true;
-    ref.btnPrevPg.disabled = false;
-  } else {
-    ref.btnNextPg.disabled = false;
-  }
-}
-
-function goToTop() {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth',
-  });
-}
 export {
   ref,
   valuePage,
@@ -118,4 +119,5 @@ export {
   handleButtonRight,
   handleButtonLeft,
   handleButton,
+  goToTop
 };

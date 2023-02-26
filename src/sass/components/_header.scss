@@ -293,15 +293,6 @@ button {
 .theme-switch {
     @media screen and (max-width: $mobile-end) {
         display: none;
-        // &.mobile {
-        //         display: flex;
-        //         position: absolute;
-        //         z-index: 100;
-        //         bottom: 18;
-        //         opacity: 100%;
-        //         pointer-events: all;
-        //         visibility: inherit;
-        //     }
     }
 
     @media screen and (min-width: $tablet) {

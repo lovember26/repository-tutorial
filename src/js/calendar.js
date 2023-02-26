@@ -29,16 +29,16 @@ function renderCalendar () {
     let lastDateofMonth = new Date(currYear, currMonth + 1, 0).getDate(); // getting last date of month
     let lastDayofMonth = new Date(currYear, currMonth, lastDateofMonth).getDay(); // getting last day of month
     let lastDateofLastMonth = new Date(currYear, currMonth, 0).getDate(); // getting last date of previous month
-    // let weekend = new Date(currYear, currMonth, 6, 7);
     let liTag = "";
+
     for (let i = firstDayofMonth; i > 0; i--) { // creating li of previous month last days
         liTag += `<li><button type="button" class="button inactive" id="inactive" disabled>${lastDateofLastMonth - i + 1}</button></li>`;
     }
     for (let i = 1; i <= lastDateofMonth; i++) { // creating li of all days of current month
         // adding active class to li if the current day, month, and year matched
-        let isToday = i === date.getDate() && currMonth === new Date().getMonth() 
-            && currYear === new Date().getFullYear() ? "active" : "";
-        let isCurrentDay = i === date.getDate() ? "current-month-day" : "";
+        let isToday = i === date.getDate() && currMonth === date.getMonth() 
+            && currYear === date.getFullYear() ? "current-month-day" : "";
+        let isCurrentDay = i === date.getDate() ? "active" : "";
         liTag += `<li><button type="button" class="button ${isToday} ${isCurrentDay}">${i}</button></li>`;   
     }
     for (let i = lastDayofMonth; i < 7; i++) { // creating li of next month first days
@@ -48,27 +48,46 @@ function renderCalendar () {
     currentDate.innerHTML = `${months[currMonth]} ${currYear}`; // passing current mon and yr as currentDate text
     daysTag.innerHTML = liTag;
 
-    const dayBtns = document.querySelectorAll(".button");
-    dayBtns.forEach(dayBtn => dayBtn.addEventListener('click', (e) => {
-        spanEl.textContent = `${addLeadingZero(e.target.textContent)}/${addLeadingZero(currMonth + 1)}/${currYear}`;
-        selectedDate = spanEl.textContent;
-        modalEl.classList.toggle('is-shown');
-        btnEl.classList.remove('btn-is-active');
+    localStorage.setItem('VALUE', JSON.stringify(date.getDate()));
 
+    const dayBtns = document.querySelectorAll(".button");
+    renderBtns(dayBtns);
+
+    daysTag.addEventListener('click', onDaysTagClick);
+};
+
+function onDaysTagClick(e) {
+        const currentActiveDate = document.querySelector('.active');
+        if (currentActiveDate) {
+            currentActiveDate.classList.remove('active');
+        }
+        e.target.classList.add('active');
+};
+
+function onTodayBtnClick() {
         todayBtn.addEventListener('click', () => {
-            spanEl.textContent = `${addLeadingZero(date.getDate())}/${addLeadingZero(new Date().getMonth() + 1)}/${new Date().getFullYear()}`;
-            currentDate.innerHTML = `${months[new Date().getMonth()]} ${new Date().getFullYear()}`;
-        });
-        return selectedDate;
-    }));
-}
+        spanEl.textContent = `${addLeadingZero(date.getDate())}/${addLeadingZero(date.getMonth() + 1)}/${date.getFullYear()}`;
+        currentDate.innerHTML = `${months[date.getMonth()]} ${date.getFullYear()}`;
+    });
+};
+
+function renderBtns(dayBtns) {
+    dayBtns.forEach(dayBtn => dayBtn.addEventListener('click', (e) => {
+    spanEl.textContent = `${addLeadingZero(e.target.textContent)}/${addLeadingZero(currMonth + 1)}/${currYear}`;
+    modalEl.classList.toggle('is-shown');
+    btnEl.classList.remove('btn-is-active');
+
+    onTodayBtnClick();
+}));
+};
 renderCalendar();
 
 function addLeadingZero(value) {
     return String(value).padStart(2, '0');
 };
 
-prevNextIcon.forEach(icon => { // getting prev and next icons
+function onPrevNextIconClick() {
+   prevNextIcon.forEach(icon => { // getting prev and next icons
     icon.addEventListener("click", () => { // adding click event on both icons
         // if clicked icon is previous icon then decrement current month by 1 else increment it by 1
         currMonth = icon.id === "prev" ? currMonth - 1 : currMonth + 1;
@@ -82,8 +101,23 @@ prevNextIcon.forEach(icon => { // getting prev and next icons
         }
         renderCalendar(); // calling renderCalendar function
     });
-});
-yearBtn.addEventListener('click', () => {
+}); 
+};
+onPrevNextIconClick();
+
+function onYearBtnClick() {
+   yearBtn.addEventListener('click', () => {
     currYear -= 1;
     renderCalendar();
-})
+
+    let saveDate = JSON.parse(localStorage.getItem('VALUE'));
+    let rendCurrentDays = daysTag.childNodes;
+
+    rendCurrentDays.forEach(el => {
+        if (el.textContent === saveDate) {
+            el.classList.add('active')
+        }
+    });
+}) 
+};
+onYearBtnClick();

@@ -103,7 +103,7 @@ ul {
 }
 
 .logo {
-  color: #111321;
+  color: var(--primary-textcolor);
   font-size: 24px;
   font-weight: 700;
   line-height: 1.375;
@@ -118,7 +118,7 @@ ul {
   height: 100%;
   z-index: 100;
   pointer-events: none;
-  background-color: #FFFFFF;
+  background-color: var(--primary-bcgcolor);
   transform: translateY(-100%);
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -132,12 +132,13 @@ ul {
 }
 
 .mobile-menu__container {
+  padding-left: 16px;
+  padding-right: 16px;
   position: relative;
 }
 
-@media screen and (min-width: 320px) {
+@media screen and (max-width: 767px) {
   .mobile-menu__container {
-    width: 320px;
     margin-left: auto;
     margin-right: auto;
   }
@@ -163,8 +164,8 @@ ul {
 }
 
 .close-btn svg {
-  stroke: #111321;
-  fill: #111321;
+  stroke: var(--primary-color);
+  fill: var(--primary-color);
 }
 
 .mobile-menu.is-open {
@@ -179,11 +180,10 @@ ul {
   justify-content: center;
   width: 32px;
   height: 32px;
-  background-color: #4440F6;
+  background-color: var(--accent-color);
   border-radius: 50% 50%;
-}
-.nav-mobile__icon--current {
-  border: 1px solid #F4F4F4;
+  fill: none;
+  stroke: white;
 }
 
 .nav-mobile {
@@ -193,7 +193,7 @@ ul {
 }
 
 .nav-mobile__link {
-  color: #111321;
+  color: var(--primary-color);
   display: flex;
   align-items: center;
   gap: 14px;
@@ -205,21 +205,20 @@ ul {
 .nav-mobile__link--current {
   height: 44px;
   width: 100%;
-  background-color: #4440F6;
-  box-shadow: 0 0 0 50vmax #4440F6;
+  background-color: var(--accent-color);
+  box-shadow: 0 0 0 50vmax var(--accent-color);
   -webkit-clip-path: inset(0 -100vmax);
           clip-path: inset(0 -100vmax);
-  color: #F4F4F4;
+  color: white;
 }
 
 .current-page__icon {
   position: absolute;
-  right: -1px;
+  opacity: 0;
+  right: 15px;
 }
-
-.nav-mobile__icon {
-  fill: none;
-  stroke: #F4F4F4;
+.current-page__icon.active {
+  opacity: 1;
 }
 
 .theme-switch-mobile {
@@ -281,7 +280,7 @@ button {
 .header-section {
   padding-top: 24px;
   padding-bottom: 22px;
-  border: 1px solid var(--headerborder-color);
+  border-bottom: 1px solid var(--headerborder-color);
 }
 @media screen and (min-width: 768px) {
   .header-section {
@@ -687,7 +686,9 @@ button {
 .pagination__btn-nav:disabled {
   cursor: not-allowed;
   background-color: #F4F4F4;
-  border-color: #F4F4F4;
+  color: #A8A8A8;
+  border: 1px solid #A8A8A8;
+  border-radius: 2px;
 }
 
 .pagination__btn-num {
@@ -704,7 +705,7 @@ button {
 .pagination__btn-points {
   display: inline-block;
   font-family: inherit;
-  color: #111321;
+  color: var(--primary-color);
   background-color: inherit;
   font-size: 14px;
   font-weight: 500;
@@ -715,7 +716,6 @@ button {
 
 .category {
   display: flex;
-  margin-right: 24px;
 }
 .category__menu {
   position: absolute;
@@ -846,6 +846,8 @@ button {
 .category__btn:hover .arrow-icon,
 .category__btn:focus .arrow-icon {
   fill: var(--button-bg-color);
+  transition-duration: 0.25s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
 }
 
@@ -1112,6 +1114,8 @@ button {
 
 .current-month-day {
   color: var(--accent-color);
+  border-color: var(--accent-color);
+  border-radius: 50%;
 }
 
 .button {
@@ -1146,10 +1150,6 @@ button {
 
 .button.active::before {
   background: var(--accent-color);
-}
-
-.button.weekend {
-  color: #878787;
 }
 
 .navigate-news {
@@ -1191,7 +1191,7 @@ button {
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
-  justify-content: center;
+  justify-content: left;
 }
 
 .news-card {
@@ -1214,7 +1214,7 @@ button {
 .weather__card {
   position: relative;
   padding: 32px 36px;
-  width: 288px;
+  width: 100%;
   background-color: #4440f7;
   border-radius: 4px;
   text-align: center;
@@ -1733,48 +1733,4 @@ button {
   .not-found___picture {
     width: 601px;
   }
-}
-
-.revision-date-container {
-  margin: auto;
-  text-align: center;
-  max-width: 1250px;
-}
-
-.icon-arrow {
-  max-width: 15px;
-  max-height: 9px;
-  margin-left: 8px;
-}
-
-.revision-date-btn {
-  width: 100%;
-  padding-bottom: 12px;
-  text-align: start;
-  background-color: rgb(255, 255, 255);
-  border: none;
-  border-bottom: 1px solid #929292;
-}
-
-.active-revision-date .icon-arrow {
-  transform: rotate(180deg);
-}
-
-.container-for-viewed-cards {
-  display: flex;
-  justify-content: start;
-  flex-wrap: wrap;
-  gap: 32px;
-  margin-top: 40px;
-  margin-bottom: 60px;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.5s ease-out;
-}
-
-.viewed-cards {
-  width: 395px;
-  height: 675px;
-  border: 1px solid #141313;
-  border-radius: 5px;
 }/*# sourceMappingURL=index.css.map */

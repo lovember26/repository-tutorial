@@ -13,12 +13,14 @@
 @import './components/weather';
 @import './components/container';
 @import './components/card-news';
-@import './components/footer';
+// @import './components/footer';
 @import './components/not-found';
 
 .revision-date-container {
-    margin: auto;
-    text-align: center;
+    margin-top: 48px;
+    margin-right: auto;
+    margin-left: auto;
+    // text-align: center;
     max-width: 1250px;
 }
 
@@ -29,10 +31,11 @@
 }
 
 .revision-date-btn {
+    color: inherit;
     width: 100%;
     padding-bottom: 12px;
     text-align: start;
-    background-color: rgba(255, 255, 255, 1);
+    background-color: transparent;
     border: none;
     border-bottom: 1px solid #929292;
 }
@@ -45,7 +48,7 @@
     display: flex;
     justify-content: start;
     flex-wrap: wrap;
-    gap: 32px;
+    gap: 30px;
     margin-top: 40px;
     margin-bottom: 60px;
     max-height: 0;
@@ -53,9 +56,9 @@
     transition: max-height 0.5s ease-out;
 }
 
-.viewed-cards {
-    width: 395px;
-    height: 675px;
-    border: 1px solid #141313;
-    border-radius: 5px;
-}
+// .viewed-cards {
+//     width: 395px;
+//     height: 675px;
+//     border: 1px solid #141313;
+//     border-radius: 5px;
+// }

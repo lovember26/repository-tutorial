@@ -21,7 +21,7 @@ function onCardBtnClick({ target }) {
     // const storageData = JSON.parse(localStorage.getItem("favorite"))
     //   ? JSON.parse(localStorage.getItem("favorite"))
     //   : [];
-    storageData.push(cardMarkup);
+    storageData.unshift(cardMarkup);
     localStorage.setItem('favorite', JSON.stringify(storageData));
   } else if (
     target.nodeName === 'BUTTON' &&

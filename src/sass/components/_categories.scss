@@ -1,6 +1,6 @@
 .category {
   display: flex;
-  margin-right: 24px;
+  // margin-right: 24px;
 
   &__menu {
     position: absolute;
@@ -146,10 +146,14 @@
   transform: rotate(180deg);
   fill: var(--button-bg-color);
   pointer-events: none;
-}
 
+}
 .category__btn:hover .arrow-icon,
 .category__btn:focus .arrow-icon {
   fill: var(--button-bg-color);
+
+  transition-duration: 0.25s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
   pointer-events: none;
 }

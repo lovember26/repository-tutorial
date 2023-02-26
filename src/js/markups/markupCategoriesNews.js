@@ -35,8 +35,8 @@ export async function markupCategories(categoriesMenu) {
 export function markupNameButton(currentButton) {
   if (categoriesMenu.classList.contains('is-open-categories')) {
     categoriesMenu.classList.remove('is-open-categories');
-    console.log(currentButton.length);
-    console.log(currentButton);
+    // console.log(currentButton.length);
+    // console.log(currentButton);
     if (currentButton.length < 18) {
       categoriesBtn.firstChild.textContent = currentButton;
     }

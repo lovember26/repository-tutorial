@@ -262,6 +262,8 @@
 }
 .current-month-day {
     color: var(--accent-color);
+    border-color: var(--accent-color);
+    border-radius: 50%;
 }
 .button{
     position: relative;
@@ -292,6 +294,4 @@
 .button.active::before {
     background: var(--accent-color);
 }
-.button.weekend {
-    color: #878787;
-}
+

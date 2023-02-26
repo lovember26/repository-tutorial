@@ -2,6 +2,7 @@ import './js/mobileMenu';
 import './js/switch';
 import './js/switchMobile';
 import './js/markups/changeCurrentClass';
+import './js/favoriteSearch';
 
 const gallery = document.querySelector('.favorite-gallery__list');
 const notFoundPage = document.querySelector('.not-found');

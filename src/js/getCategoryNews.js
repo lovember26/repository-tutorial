@@ -3,22 +3,16 @@ import { markup } from './markups/newsCard.js';
 import { checkFavCards } from './addAndRemoveFromFavorite.js';
 import { getMarkupWeather } from './markups/weather-markup.js';
 import { weatherData } from './markups/weather-markup.js';
-import { pagination } from './pagination.js';
+import { valuePage, pagination } from './pagination.js';
 
 let currentCategory = '';
-
-const valuePage = {
-  curPage: 1,
-  numLinksTwoSide: 1,
-  amountCards: 0,
-  totalPages: 0,
-};
 
 const popularNewsGallery = document.querySelector('.news-gallery');
 const notFoundPage = document.querySelector('.not-found');
 const currentDateContainer = document.querySelector('.calendar-btn-span');
 const calendarBtn = document.querySelector('.calendar-btn');
 const todayBtn = document.querySelector('.today-btn');
+const paginator = document.querySelector('.pagination__container');
 
 calendarBtn.addEventListener('blur', onSearchDate);
 todayBtn.addEventListener('click', onSearchDate);
@@ -30,48 +24,53 @@ function onSearchDate() {
   getCategoryNews(currentCategory);
 }
 
-export async function getCategoryNews(category, offset) {
+export async function getCategoryNews(category) {
   currentCategory = category;
   try {
-    console.log(
-      '🚀 ~ file: getCategoryNews.js:23 ~ getCategoryNews ~ category:',
-      category
-    );
+    // console.log(
+    //   '🚀 ~ file: getCategoryNews.js:23 ~ getCategoryNews ~ category:',
+    //   category
+    // );
     let newsArr = [];
     let filteredNews = [];
-    const getCategotyNews = await getCategoryNewsAPI(category, offset);
+    const getCategotyNews = await getCategoryNewsAPI(category);
     const dataNews = getCategotyNews.results;
 
     let markupNews = '';
     const markupWeather = getMarkupWeather({ data: weatherData });
     // console.log(markupWeather);
     // console.log({ data: weatherData });
-    const itemWeather = `<li class="weather__card">${markupWeather}</li>`;
+    const itemWeather = `<li class="weather__card">${markupWeather.markup}</li>`;
     // console.log(itemWeather);
 
     const currentDate = currentDateContainer.innerText;
-    console.log(
-      '🚀 ~ file: getCategoryNews.js:37 ~ getCategoryNews ~ currentDate:',
-      currentDate
-    );
+    // console.log(
+    //   '🚀 ~ file: getCategoryNews.js:37 ~ getCategoryNews ~ currentDate:',
+    //   currentDate
+    // );
 
     if (currentDate === 'Select a date...') {
       newsArr = toAdaptData(dataNews);
     } else {
       filteredNews = filterDateNews(dataNews, currentDate);
-      console.log(
-        '🚀 ~ file: getCategoryNews.js:43 ~ getCategoryNews ~ filteredNews:',
-        filteredNews
-      );
+      // console.log(
+      //   '🚀 ~ file: getCategoryNews.js:43 ~ getCategoryNews ~ filteredNews:',
+      //   filteredNews
+      // );
 
       if (filteredNews.length === 0) {
-        notFoundPage.classList.add('visually-hidden');
+        popularNewsGallery.innerHTML = '';
+        notFoundPage.classList.remove('visually-hidden');
+        paginator.style.display = 'none';
         return;
+      }
+      if (filteredNews.length !== 0) {
+        notFoundPage.classList.add('visually-hidden');
       }
       newsArr = toAdaptData(filteredNews);
     }
 
-    console.log(newsArr);
+    // console.log(newsArr);
 
     if (window.innerWidth < 768) {
       if (newsArr.length < 5) {
@@ -161,7 +160,7 @@ export async function getCategoryNews(category, offset) {
 
 function toAdaptData(data) {
   return data.map(obj => {
-    if (obj.multimedia === null) {
+    if (obj.multimedia === null || obj.section === 'Automobiles') {
       obj.multimedia = [
         {
           url: true,
@@ -170,7 +169,7 @@ function toAdaptData(data) {
           url: true,
         },
         {
-          url: 'https://amsrus.ru/wp-content/uploads/2016/02/Mercedes-Benz-C63-AMG-Black-Series-1.jpg',
+          url: "https://t3.ftcdn.net/jpg/01/09/01/16/360_F_109011607_xtOkqVoVTx54Dmf85pDmYTU0iwI82Kbq.jpg",
         },
       ];
     }
@@ -187,8 +186,8 @@ function toAdaptData(data) {
         },
       ]);
 
-    container.published_date = obj.published_date;
-    container.subsection = obj.section;
+    container.published_date = dateConversionNews(obj.published_date);
+    container.section = obj.section;
     container.title = obj.title;
     container.url = obj.url;
 
@@ -198,12 +197,12 @@ function toAdaptData(data) {
 
 function filterDateNews(arrNews, selectedDate) {
   return arrNews.filter(news => {
-    console.log('Convert', dateConversion(news.published_date));
-    console.log(
-      '🚀 ~ file: getCategoryNews.js:205 ~ filterDateNews ~ selectedDate:',
-      selectedDate
-    );
-    console.log(dateConversion(news.published_date) === selectedDate);
+    // console.log('Convert', dateConversion(news.published_date));
+    // console.log(
+    //   '🚀 ~ file: getCategoryNews.js:205 ~ filterDateNews ~ selectedDate:',
+    //   selectedDate
+    // );
+    // console.log(dateConversion(news.published_date) === selectedDate);
     return String(dateConversion(news.published_date)) === String(selectedDate);
   });
 }
@@ -212,4 +211,10 @@ function dateConversion(getDate) {
   const date = new Date(getDate);
   const month = String(date.getMonth() + 1);
   return `${date.getDate()}/${month.padStart(2, '0')}/${date.getFullYear()}`;
+}
+
+function dateConversionNews(getDate) {
+  const date = new Date(getDate);
+  const month = String(date.getMonth() + 1);
+  return `${date.getFullYear()}-${month.padStart(2, '0')}-${date.getDate()}`;
 }

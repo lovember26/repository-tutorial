@@ -37,9 +37,12 @@
   }
 
   &:disabled {
-    cursor: not-allowed;;
+    cursor: not-allowed;
     background-color: $lt-body-color;
-    border-color: $dt-main-text-color;
+    // border-color: $dt-main-text-color;
+    color: $footer-color;
+    border: 1px solid $footer-color;
+    border-radius: 2px;
   }
 }
 
@@ -57,7 +60,7 @@
 .pagination__btn-points {
   display: inline-block;
   font-family: inherit;
-  color: $lt-main-text-color;
+  color: var(--primary-color);
   background-color: inherit;
   font-size: 14px;
   font-weight: 500;
