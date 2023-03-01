@@ -3,28 +3,13 @@ import { getMarkupWeather } from './markups/weather-markup.js';
 import { weatherData } from './markups/weather-markup.js';
 import { markup } from './markups/newsCard.js';
 import { checkFavCards } from './addAndRemoveFromFavorite';
-import { ref,
-  valuePage,
-  pagination,
-  handleButtonRight,
-  handleButtonLeft,
-  handleButton,
-  goToTop } from './pagination.js';
-//import { result } from 'lodash';
-//const valuePage = {
- // curPage: 1,
- // numLinksTwoSide: 1,
-  //amountCards: 0,
-  //totalPages: 0,
-//};
 
-const btn= document.querySelector(".pagination__container")
-const input = document.querySelector('.search-form__input')
+const btn = document.querySelector('.pagination__container');
+const input = document.querySelector('.search-form__input');
 const newsGallery = document.querySelector('.news-gallery');
 const pageNotFound = document.querySelector('.not-found');
 const form = document.querySelector('.search-form');
 form.addEventListener('submit', onEnterPush);
-
 
 function onEnterPush(e) {
   e.preventDefault();
@@ -47,11 +32,10 @@ async function getSearchNews(search) {
 
       createMarkup(adaptedData);
     } else if (getNews.data.response.docs.length === 0) {
-      newsGallery.innerHTML="";
+      newsGallery.innerHTML = '';
       btn.remove();
       //paginator.style.display = 'none';
       pageNotFound.classList.remove('visually-hidden');
-
     }
     return adaptedData;
   } catch (err) {
@@ -96,7 +80,7 @@ function createMarkup(array) {
   }
 
   newsGallery.innerHTML = markupNews;
-  checkFavCards() ;
+  checkFavCards();
   pagination(valuePage);
 }
 
@@ -135,9 +119,9 @@ function toAdaptData(data) {
         {
           caption: obj.headline.main,
           'media-metadata': [
-            { url: `https://static01.nyt.com/${obj.multimedia[0].url}`},
-            { url: `https://static01.nyt.com/${obj.multimedia[1].url}`},
-            { url: `https://static01.nyt.com/${obj.multimedia[2].url}`},
+            { url: `https://static01.nyt.com/${obj.multimedia[0].url}` },
+            { url: `https://static01.nyt.com/${obj.multimedia[1].url}` },
+            { url: `https://static01.nyt.com/${obj.multimedia[2].url}` },
           ],
         },
       ]);
@@ -152,20 +136,20 @@ function toAdaptData(data) {
 let chunkNewsArr = [];
 
 //ref.paginationEl.addEventListener('click', async e => {
-  //const ele = e.target;
-  // console.log(ele);
+//const ele = e.target;
+// console.log(ele);
 
-  //if (ele.dataset.page) {
-  //  const pageNumber = parseInt(e.target.dataset.page, 10);
-  //  valuePage.curPage = pageNumber;
-  //  console.log(pageNumber);
- // }
- // await getSearchNews(input.value).then((data) => renderNewsMarkup(data, valuePage.amountCards))
- // goToTop();
+//if (ele.dataset.page) {
+//  const pageNumber = parseInt(e.target.dataset.page, 10);
+//  valuePage.curPage = pageNumber;
+//  console.log(pageNumber);
+// }
+// await getSearchNews(input.value).then((data) => renderNewsMarkup(data, valuePage.amountCards))
+// goToTop();
 //});
 
 function renderNewsMarkup(data, amountCards) {
- // const o = [...data];
+  // const o = [...data];
   chunkArray(data, amountCards);
 
   for (let i = 0; i <= chunkNewsArr.length; i += 1) {
@@ -182,9 +166,9 @@ function renderNewsMarkup(data, amountCards) {
 
 function chunkArray(arrayData, chunkSize) {
   while (arrayData.length) {
-  chunkNewsArr.push(arrayData.splice(0, chunkSize));
-  // while(arrayData?.length>0){
-   // results.push(arrayData.splice(0, chunkSize))
+    chunkNewsArr.push(arrayData.splice(0, chunkSize));
+    // while(arrayData?.length>0){
+    // results.push(arrayData.splice(0, chunkSize))
   }
   //return results;
 }
@@ -227,5 +211,4 @@ function createMarkupWithChunkArray(array) {
   }
   newsGallery.innerHTML = markupNews;
   checkFavCards();
-  
 }

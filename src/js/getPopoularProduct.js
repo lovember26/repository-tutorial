@@ -1,73 +1,44 @@
 import { getPopularNewsAPI } from './api/news-api.js';
 import { getMarkupWeather } from './markups/weather-markup.js';
 import { weatherData } from './markups/weather-markup.js';
-import { ref,
-  valuePage,
-  pagination,
-  handleButtonRight,
-  handleButtonLeft,
-  handleButton,
-  goToTop } from './pagination.js';
+
 import { markup } from './markups/newsCard.js';
 import { checkFavCards } from './addAndRemoveFromFavorite.js';
+import { createMarkupOfBtns } from './pagination.js';
 
 const popularNewsGallery = document.querySelector('.news-gallery');
 const notFoundPage = document.querySelector('.not-found');
+const btnContainer = document.querySelector('#pagination');
+const prevBtn = document.querySelector('.prev-btn');
+const nextBtn = document.querySelector('.next-btn');
 
-async function getPopularProduct() {
+btnContainer.addEventListener('click', onPageNumberClick);
+prevBtn.addEventListener('click', onPrevBtnClick);
+nextBtn.addEventListener('click', onNextBtnClick);
+
+let currentPage = 1;
+let valuePage;
+getPopularProduct(currentPage);
+async function getPopularProduct(currentPage) {
   try {
     const getNews = await getPopularNewsAPI();
-    // console.log('Arr objects with mostpopular News', getNews.results);
-    const newsArr = getNews.results;
-    getAmountCards(newsArr);
-    // console.log('valuePage', valuePage);
-    let markupNews = '';
-    const markupWeather = getMarkupWeather({ data: weatherData });
-    // console.log(markupWeather);
-    // console.log({ data: weatherData });
-    const itemWeather = `<li class="weather__card">${markupWeather.markup}</li>`;
-    // console.log(itemWeather);
 
-    if (window.innerWidth < 768) {
-      for (let i = 0; i < 5; i += 1) {
-        if (i === 0) {
-          markupNews += itemWeather;
-        } else {
-          markupNews += markup(newsArr[i]);
-        }
-      }
-    }
-    if (window.innerWidth >= 768 && window.innerWidth < 1280) {
-      for (let i = 0; i < 8; i += 1) {
-        if (i === 1) {
-          markupNews += itemWeather;
-        } else {
-          markupNews += markup(newsArr[i]);
-        }
-      }
-    }
-    if (window.innerWidth >= 1280) {
-      for (let i = 0; i < 9; i += 1) {
-        if (i === 2) {
-          markupNews += itemWeather;
-        } else {
-          markupNews += markup(newsArr[i]);
-        }
-      }
-    }
-    popularNewsGallery.innerHTML = markupNews;
-    checkFavCards();
-    // console.log(markupNews);
-    pagination(valuePage);
+    const newsArr = getNews.results;
+    valuePage = getAmountCards(newsArr);
+
+    const pagArr = getArrForPag(newsArr, currentPage, valuePage.amountCards);
+
+    createMarkup(pagArr);
+    createMarkupOfBtns(currentPage, valuePage.totalPages);
   } catch (error) {
     notFoundPage.classList.toggle('visually-hidden');
   }
 }
-
-getPopularProduct();
-window.addEventListener('resize', getPopularProduct);
-
+function getArrForPag(newsArr, currentPage, amountCards) {
+  return newsArr.splice((currentPage - 1) * amountCards, amountCards);
+}
 function getAmountCards(array) {
+  const valuePage = {};
   if (window.innerWidth < 768) {
     valuePage.amountCards = 5;
     valuePage.totalPages = Math.ceil(array.length / valuePage.amountCards);
@@ -82,113 +53,71 @@ function getAmountCards(array) {
     valuePage.amountCards = 9;
     valuePage.totalPages = Math.ceil(array.length / valuePage.amountCards);
   }
+  return valuePage;
 }
 
-let chunkNewsArr = [];
-
-ref.paginationEl.addEventListener('click', e => {
-  const ele = e.target;
-  // console.log(ele);
-
-  if (ele.dataset.page) {
-    const pageNumber = parseInt(e.target.dataset.page, 10);
-    valuePage.curPage = pageNumber;
-    // console.log(pageNumber);
-  }
-  // console.log(valuePage.amountCards);
-
-  getPopularProductData()
-  .then(array => {
-    renderNewsMarkup(array, valuePage.amountCards);
-  })
-  .catch(error => console.error(error));
-  
-  goToTop();
-});
-
-ref.paginationContainerEl.addEventListener('click', e => {
-  handleButton(e.target);
-
-  getPopularProductData()
-  .then(array => {console.log(array)
-    renderNewsMarkup(array, valuePage.amountCards);
-  })
-  .catch(error => console.error(error));
-
-  goToTop();
-});
-
-async function getPopularProductData() {
-  const getNews = await getPopularNewsAPI();
-  // console.log('Arr objects with mostpopular News', getNews.results);
-  const newsArr = await getNews.results;
-  getAmountCards(newsArr);
-  return newsArr;
-}
-
-function renderNewsMarkup(data, amountCards) {
-  chunkArray(data, amountCards);
-  // console.log('chunkArray', chunkArray(getNews.results, valuePage.amountCards));
-
-  for (let i = 0; i <= chunkNewsArr.length; i += 1) {
-    // console.log(chunkNewsArr[i]);
-    if (valuePage.curPage === i + 1) {
-      // console.log('page', chunkNewsArr[i]);
-      createMarkupWithChunkArray(chunkNewsArr[i]);
-      break;
-    }
-  }
-  pagination(valuePage);
-
-  handleButtonLeft();
-  handleButtonRight();
-}
-
-function chunkArray(arrayData, chunkSize) {
-  while (arrayData.length) {
-    chunkNewsArr.push(arrayData.splice(0, chunkSize));
-  }
-}
-
-function createMarkupWithChunkArray(array) {
-  let markupNews = '';
+function createMarkup(newsArr) {
   const markupWeather = getMarkupWeather({ data: weatherData });
-  // console.log(markupWeather);
-  // console.log({ data: weatherData });
+
   const itemWeather = `<li class="weather__card">${markupWeather.markup}</li>`;
-  // console.log(itemWeather);
+  let markupNews = '';
 
   if (window.innerWidth < 768) {
-    for (let i = 0; i < array.length; i += 1) {
+    for (let i = 0; i < newsArr.length; i += 1) {
       if (i === 0) {
         markupNews += itemWeather;
       } else {
-        markupNews += markup(array[i]);
+        markupNews += markup(newsArr[i]);
       }
     }
   }
   if (window.innerWidth >= 768 && window.innerWidth < 1280) {
-    for (let i = 0; i < array.length; i += 1) {
+    for (let i = 0; i < newsArr.length; i += 1) {
       if (i === 1) {
         markupNews += itemWeather;
       } else {
-        markupNews += markup(array[i]);
+        markupNews += markup(newsArr[i]);
       }
     }
   }
   if (window.innerWidth >= 1280) {
-    for (let i = 0; i < array.length; i += 1) {
+    for (let i = 0; i < newsArr.length; i += 1) {
       if (i === 2) {
         markupNews += itemWeather;
       } else {
-        markupNews += markup(array[i]);
-      }      
-    }
-    if (array.length === 2) {
-      markupNews += itemWeather;
+        markupNews += markup(newsArr[i]);
+      }
     }
   }
+
   popularNewsGallery.innerHTML = markupNews;
   checkFavCards();
-  // console.log(markupNews);
+}
+
+function onPageNumberClick(e) {
+  if (
+    e.target.nodeName === 'BUTTON' &&
+    e.target.classList.contains('pagination__btn-num')
+  ) {
+    btnContainer.innerHTML = '';
+    currentPage = e.target.dataset.page;
+    getPopularProduct(currentPage);
+  }
+}
+
+function onPrevBtnClick() {
+  if (Number(currentPage) > 1) {
+    currentPage = Number(currentPage) - 1;
+
+    btnContainer.innerHTML = '';
+    getPopularProduct(currentPage);
+  }
+}
+function onNextBtnClick() {
+  if (Number(currentPage) < valuePage.amountCards) {
+    currentPage = Number(currentPage) + 1;
+    btnContainer.innerHTML = '';
+
+    getPopularProduct(currentPage);
+  }
 }
